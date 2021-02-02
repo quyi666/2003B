@@ -1,27 +1,30 @@
 <template>
   <div class="wrapper">
     <el-container>
-      <el-aside width="200px">
+      <el-aside width="200px" id="aside">
         <h2>login</h2>
         <!-- 侧边栏 -->
         <el-menu
           default-active="2"
           class="el-menu-vertical-demo"
-          background-color="#545c64"
+          background-color="#424F63"
           text-color="#fff"
           active-text-color="#ffd04b"
+        
+          :collapse="isCollapse"
           router
+          
         >
           <el-menu-item index="/index">
             <i class="el-icon-menu"></i>
             <span slot="title">首页</span>
           </el-menu-item>
-          <el-submenu index="1">
+          <el-submenu index="/Form">
             <template slot="title">
               <i class="el-icon-location"></i>
               <span>表格管理</span>
             </template>
-            <el-menu-item index="2-1">
+            <el-menu-item index="/Form">
               <span slot="title">基本表格</span>
             </el-menu-item>
             <el-menu-item index="2-2">
@@ -36,13 +39,13 @@
               <i class="el-icon-location"></i>
               <span>图表管理</span>
             </template>
-            <el-menu-item index="3-1">
+            <el-menu-item index="/eatch">
               <span slot="title">柱状图</span>
             </el-menu-item>
-            <el-menu-item index="3-2">
+            <el-menu-item index="/LineChart">
               <span slot="title">折线图</span>
             </el-menu-item>
-            <el-menu-item index="3-3">
+            <el-menu-item index="/PieChart">
               <span slot="title">饼图</span>
             </el-menu-item>
           </el-submenu>
@@ -51,7 +54,7 @@
               <i class="el-icon-location"></i>
               <span>表单管理</span>
             </template>
-            <el-menu-item index="4-1">
+            <el-menu-item index="/RenderForm">
               <span slot="title">渲染表单</span>
             </el-menu-item>
           </el-submenu>
@@ -71,7 +74,7 @@
             <i class="el-icon-menu"></i>
             <span slot="title">操作日志</span>
           </el-menu-item>
-          <el-menu-item index="9">
+          <el-menu-item index="/test">
             <i class="el-icon-menu"></i>
             <span slot="title">测试</span>
           </el-menu-item>
@@ -80,7 +83,9 @@
       <el-container>
         <el-header>
           <div class="header_left">
-            <span>|||</span>
+
+            <span @click="showCheck">|||</span>
+
             <h3>VUE-ADMIN 后台管理系统</h3>
           </div>
 
@@ -94,26 +99,7 @@
           </div>
         </el-header>
         <el-main>
-          <span>首页</span>
-          <span>首页</span>
-          <span>首页</span>
-          <span>首页</span>
-          <span>首页</span>
-          <span>首页</span>
-          <span>首页</span>
-          <span>首页</span>
-          <span>首页</span>
-          <span>首页</span>
-          <span>首页</span>
-          <span>首页</span>
-          <span>首页</span>
-          <span>首页</span>
-          <span>首页</span>
-          <span>首页</span>
-          <span>首页</span>
-          <span>首页</span>
-          <span>首页</span>
-          <span>首页</span>
+          <router-view></router-view>
         </el-main>
       </el-container>
     </el-container>
@@ -130,7 +116,7 @@ export default {
   components: {},
   // 组件状态值
   data() {
-    return {};
+    return {isCollapse:false,};
   },
   // 计算属性
   computed: {},
@@ -143,14 +129,26 @@ export default {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
-      }).then(() => {
-        localStorage.removeItem("token");
-        this.$router.push("/admin");
-        this.$message.success("您已退出成功")
       })
-      .catch(()=>{
-           this.$message("您已取消退出登录")
-      })
+        .then(() => {
+          localStorage.removeItem("token");
+          this.$router.push("/admin");
+          this.$message.success("您已退出成功");
+        })
+        .catch(() => {
+          this.$message("您已取消退出登录");
+        });
+    },
+    showCheck(){
+      console.log(1111)
+     if(this.isCollapse==true){
+       this.isCollapse=false
+      aside.style.width='200px'
+     }else{
+       this.isCollapse=true
+       aside.style.width='60px'
+       
+     }
     }
   },
   // 以下是生命周期钩子   注：没用到的钩子请自行删除
@@ -210,12 +208,13 @@ export default {
   width: 100%;
 }
 .el-header {
-  background-color: #b3c0d1;
+  background-color:#fff;
   color: #333;
   font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   .header_left {
     width: 230px;
     display: flex;
@@ -240,13 +239,14 @@ export default {
 }
 
 .el-aside {
-  background-color: #545c64;
-  color: #333;
+ 
+  background-color: #424F63;
+  color: rgb(53, 30, 105);
   height: 680px;
   height: 100%;
   h2 {
     text-align: center;
-    color: #b0e78c;
+    color: #65CEA7;
   }
 }
 
@@ -259,7 +259,6 @@ export default {
   background-color: #e9eef3;
   color: #333;
   text-align: center;
-  line-height: 160px;
 }
 
 body > .el-container {
