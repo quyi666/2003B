@@ -293,5 +293,25 @@
         width: 100%;
        
     }
+    tr{
+width: 1000px;
+
+
+}
+td{
+width: 240px;
+  text-align: left;
+  
+
+}
+.el-form{
+  margin-left: 20px;
+  text-align: left;
+ }        
+.el-input{
+width: 160px;
+  margin-left: 60px;
+
+}
   
 </style>

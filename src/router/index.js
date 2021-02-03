@@ -1,25 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
-
 Vue.use(VueRouter)
 
 const routes = [
-  // {
-  //   path: '/admin',
-  //   name: 'admin',
-  //   component:()=>import('@/views/admim')
-  // },
-  // {
-  //   path: '/index',
-  //   name: 'index',
-  //   component:()=>import('@/views/index'),
-  //   // redirect:"/index",
-  // },
+  {
+    path:'/',
+    redirect:'/admin'
+  },
   {
     path:'/admin',
     name:'admin',
-    component:()=>import('../views/admin.vue')
+    component:()=>import('../views/admin.vue'),
+    
   },
   {
     path:'/index',
